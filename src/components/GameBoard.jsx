@@ -6,17 +6,17 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard() {
+export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   function handleSelectSquare(rowIndex, collIndex) {
     setGameBoard((previousGameBoard) => {
-      const updatedBoard = [
-        ...previousGameBoard.map((innerArray) => [...innerArray]),
-      ];
-      updatedBoard[rowIndex][collIndex] = 'X';
+      const updatedBoard = [...previousGameBoard.map((innerArray) => [...innerArray])];
+      updatedBoard[rowIndex][collIndex] = activePlayerSymbol;
       return updatedBoard;
     });
+
+    onSelectSquare();
   }
 
   return (
